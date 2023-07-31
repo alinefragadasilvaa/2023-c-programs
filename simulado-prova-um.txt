@@ -1,0 +1,212 @@
+#include <stdio.h>
+
+int main(){
+
+	int y=12, w=2, x=0;  
+
+	while(x<3){
+
+		do{
+			y=w+x;
+			w--;
+		} while(w>2);
+
+		if (w<0){
+			y = y*w;
+		} else {
+			y++;
+		}
+
+		printf("%d,%d,%d\n",w,x,y);
+
+		x++;
+	}
+
+	return 0;
+}
+
+#include <stdio.h>
+
+int main(){
+
+	int y=12, w=2, x;  
+
+	for(x=0;x<3;x++){
+
+		do{
+			y=w+x;
+			w--;
+		} while(w>2);
+
+		if (w<0){
+			y = y*w;
+		} else {
+			y++;
+		}
+
+		printf("%d,%d,%d\n",w,x,y);
+	}
+
+	return 0;
+}
+
+#include <stdio.h>
+#include <math.h>
+
+int main(){
+
+	int i, sinal;
+	double n, tolerancia, termoAtual, termoAcumulado, erro;
+
+	printf("Digite o valor real de n:\n");
+	scanf("%f", &n);
+
+	printf("Digite o valor real de tolerancia:\n");
+	scanf("%f", &tolerancia);
+	
+	i = 0; // contador para a potência
+	sinal = 1; // sinal do primeiro termo é positivo
+	termoAcumulado = 1; // primeiro termo (1/1) já calculado
+
+	do{
+		sinal = -sinal; // troca de sinal para calcular o termo da iteração atual
+		termoAtual = sinal*(1/pow(n, i));
+		termoAcumulado += termoAtual; 
+		erro = fabs(termoAtual); // cálculo do erro para determinar o fim da iteração
+		i++;
+	} while(erro>tolerancia); // enquanto o erro for maior continua calculando, pois a aproximação deve ser tal que o erro seja menor ou igual à tolerância 
+
+	printf("Valor aproximado: "%f"\n", termoAcumulado);
+	
+
+	return 0;
+}
+
+#include <stdio.h>
+#include <math.h>
+
+#define N 5
+
+int main(){
+
+	int x[N], y[N], i, j, k, l, cont = 0;
+	float distancias[N*N] = {0}, distancia, maior;
+
+	for(i=0;i<N;i++){ // preenchimento dos vetores com as cordenadas
+		printf("Voce ja digitou "%d" de "%d" pontos\n", i, N); // controle do usuário
+		printf("Digite a cordenada x do ponto "%d":\n", i+1);
+		scanf("%d", &x[i]);
+		printf("Digite a cordenada y do ponto "%d":\n", i+1);
+		scanf("%d", &y[i]);
+	}
+
+	for(j=0;j<N;j++){ // calculando a distancia do primeiro ponto e os pontos restantes
+		for(k=j+1;k<N;k++){
+			distancia = sqrt(pow((x[k]-x[j]), 2)+pow((y[k]-y[j]), 2));
+			distancias[cont] = distancia; // armazenando no vetor de distancias
+			cont++;
+		}
+	}
+	// não são calculadas distâncias entre pontos repetidos (ex: entre o ponto 1 e 2 e o ponto 2 e 1)
+	
+	maior = distancias[0];
+	l = 1;
+	while(distancias[l] != 0){ // percorrendo o vetor 
+		if(distancias[l]>maior){
+			maior = distancias[l];
+		}
+		l++;
+	}
+
+	printf("Maior distancia entre dois pontos: %f\n", maior);
+
+	return 0;
+}
+
+#include <stdio.h>
+#include <string.h>
+
+#define MAXTXT 25
+#define MAXPAL 3
+
+int main(){
+
+	char s1[MAXTXT], s2[MAXPAL];
+	int i, j, tamanhoS2, tamanhoS1, limite, igual, quantidade = 0;
+
+	fgets(s1, MAXTXT, stdin);
+	getchar();
+	fgets(s2, MAXPAL, stdin);
+	getchar();
+
+	tamanhoS1 = strlen(s1);
+	tamanhoS2 = strlen(s2);
+
+	for(i=0;i<tamanhoS1;i++){
+		igual = 0;
+		limite = i+(tamanhos2-1);
+		if(s1[i] == s2[0] && limite <= tamanhoS1){
+			for(j=1;j<=tamanhos2-1;j++){
+				if(s1[i+j] == s2[j]){
+					igual++;
+				}
+			}
+		}
+		if(igual == tamanhos2-1){
+			quantidade++;
+		}
+	}
+
+	printf("A s2 ocorre %d vezes na s1\n", quantidade);
+
+	return 0;
+}
+
+#include <stdio.h>
+#include <string.h>
+
+#define L 4
+#define T 4
+
+int main(){
+
+	int quantidadeVendida[T][L], i, j, k, l, coluna, maior;
+	char titulos[T][81];
+
+	for(i=0;i<T;i++){
+		printf("Digite o titulo do livro %d:\n", i+1);
+		fgets(titulos[i], 80, stdin);
+		for(j=0;j<L;j++){
+			printf("Digite quantos exemplares do titulo digitado foram vendidos na loja de codigo %d", j);
+			scanf("%d", &quantidadeVendida[i][j]);
+			getchar(); // para \n não atrapalhar o fgets da próxima iteração
+		}
+	}
+
+	printf("Digite o codigo da loja:\n");
+	scanf("%d", &coluna);
+	getchar();
+
+	if(coluna >= 0 && coluna < L){
+		maior = quantidadeVendida[0][coluna];
+		for(k=1;k<T;k++){
+			if(quantidadeVendida[k][coluna] > maior){
+				maior = quantidadeVendida[k][coluna];
+			}
+		}
+		
+		for(l=0;l<T;l++){
+			if(quantidadeVendida[l][coluna] == maior){
+				printf("%s: %d unidades\n", titulos[l], maior); // titulo que tem o mesmo indice da linha que tem o maior numero de exemplares vendidos
+			}
+		}
+	}  else {
+		printf("Sistema finalizado\n");
+	}
+	
+	return 0;	
+}
+
+
+
+
