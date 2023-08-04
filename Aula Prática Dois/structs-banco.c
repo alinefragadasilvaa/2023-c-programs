@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <string.h>
 
 #define N 10
 
@@ -23,10 +22,10 @@ void achaMaiores(CLIENTE maiores[], CLIENTE clientes[], int numero){
   maiores[0]=clientes[0];
   contMaior++;
   for(int i=1;i<numero;i++){
-    if(clientes[i]==maiores[0]){
+    if(clientes[i].saldo==maiores[0].saldo){
       maiores[contMaior] = clientes[i];
       contMaior++;
-    } else if(clientes[i]>maiores[0]){
+    } else if(clientes[i].saldo>maiores[0].saldo){
         contMaior = 0;
         maiores[contMaior]=clientes[i];
         contMaior++;
@@ -38,9 +37,9 @@ void achaMaiores(CLIENTE maiores[], CLIENTE clientes[], int numero){
 
 void mostraMaiores(CLIENTE maiores[], int numero){
   for(int i=0;i<numero;i++){
-    printf("Maior numero %d\n", i+1);
-    printf("Codigo: %d\n", cliente[i].codigo);
-    printf("Saldo: %.2f\n", cliente[i].saldo); 
+    printf("Cliente com maior saldo %d\n", i+1);
+    printf("Codigo: %d\n", maiores[i].codigo);
+    printf("Saldo: %.2f\n", maiores[i].saldo);
   }
 }
 
@@ -48,6 +47,6 @@ int main(){
   CLIENTE clientes[100], maiores[100];
   armazenaCliente(clientes, N);
   achaMaiores(maiores, clientes, N);
-  
+
   return 0;
 }
