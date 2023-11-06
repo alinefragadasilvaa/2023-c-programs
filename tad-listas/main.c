@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "listas.h"
+#include "header.h"
 
-/*int main(){
+int main(){
+    Nodo *primeiro = inicializa();
 
     return 0;
-}*/
+}
